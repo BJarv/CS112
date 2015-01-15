@@ -36,14 +36,16 @@ averageYear x = sum (years x) `div` length x
 years :: [(String, String, Int)] -> [Int]
 years ys = [ y | (_, _, y) <- ys ]
 
---9. references
+--9. references returns number of citations in a block of text
 references :: String -> Int
 references n = length (filter (=='[') n)
 
---10. citeText
+--10. citeText takes block of text and swaps citations for citation markers.
 citeText :: [(String, String, Int)] -> String -> String
 citeText cite text = unwords (map (textCiter cite) (words text))
 
+--10a. textCiter is a helper function that does the load of the work that is given to it from citeText.
+--digitToInt converts the number in the citation into a Int to be used as a vertex with the list of citations
 textCiter :: [(String, String, Int)] -> String -> String
 textCiter cites word =
 	if '[' `elem` word
