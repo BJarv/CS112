@@ -1,4 +1,7 @@
 --Brandon Jarvinen
+--Collab with: Kevin Stewart
+
+import Data.Char
 
 --2. citeAuthor "Herman" "Melville" -- -> "Melville, Herman"
 citeAuthor :: String -> String -> String
@@ -39,13 +42,15 @@ references n = length (filter (=='[') n)
 
 --10. citeText
 citeText :: [(String, String, Int)] -> String -> String
-citeText c b = filter' (== "[" ++ _ ++ "]") (words b) c
+citeText cite text = unwords (map (textCiter cite) (words text))
 
-filter' :: (a -> Bool) -> [String] -> [(String, String, Int)] -> [String]  
-filter' _ [] _ = []  
-filter' p (x:xs) ys
-    | p x       = b : filter' p xs ys -- prepend b
-    | otherwise = x : filter' p xs ys -- prepend whatever failed the filter
-    where b = citeBook (ys !! ((read (take 1 (drop 1 x)) :: Int) - 1)) 
-    -- take the number from inside the citation, read it to an int, subtract one for list vertices, and rather than add the citation bracket, add the citation selected by vertex
-    -- doesn't compile
+textCiter :: [(String, String, Int)] -> String -> String
+textCiter cites word =
+	if '[' `elem` word
+		then citeBook (cites !! (digitToInt (word !! 1) - 1)) 
+		else word
+
+
+
+txt :: String
+txt = "[1] and [2] both feature characters who will do whatever it takes to get to their goal, and in the end the thing they want the most ends up destroying them.  In case of [2] this is a whale..."
