@@ -48,6 +48,11 @@ onlyCapitals2 xs = [x | x <- xs, isUpper x]
 divRemainder :: Int -> Int -> (Int, Int)
 divRemainder a b = (a `div` b, a `mod` b)
 
+--10
+digitSum :: Int -> Int
+digitSum x
+	| x == 0    = 0
+	| otherwise = (x `mod` 10) + (digitSum (x `div` 10))
 
 
 
