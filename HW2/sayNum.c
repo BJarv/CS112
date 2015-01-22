@@ -1,5 +1,6 @@
 //Brandon Jarvinen
 //Pair Programming with: Logan Collingwood
+//Code help from rosettacode.org
 
 
 #include <stdio.h>
@@ -22,10 +23,9 @@ const char *illions[] = { 0, "Thousand", "Million", "Billion", "Trillion",
 	"Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion"
 	};
 
-//
 const int umptillion = sizeof(illions) / sizeof(illions[0]) * 3 - 3;
  
-int say_hundred(const char *s, int len, int depth, int has_lead)
+int say_hundred(const char *s, int len, int depth, int has_lead) //
 {
 	int c[3], i;
 	for (i = -3; i < 0; i++) {
@@ -38,7 +38,7 @@ int say_hundred(const char *s, int len, int depth, int has_lead)
 		printf("%s Hundred", ones[c[0]]);
 		has_lead = 1;
 	}
-	if (has_lead && (c[1] || c[2]))
+	if (has_lead && (c[1] || c[2])) 
 		printf((!depth || c[0]) && (!c[0] || !c[1]) ? "and " :
 			c[0] ? " " : "");
  
@@ -102,7 +102,7 @@ void say_number(const char *s)
 	len = strlen(s);
 	if (!len) goto nan;
 
-	for (i = 0; i < len; i++) {
+	for (i = 0; i < len; i++) { //error checking
 		if (s[i] < '0' || s[i] > '9') {
 			printf("(Not a Number)");
 			return;
